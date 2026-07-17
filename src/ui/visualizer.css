@@ -55,19 +55,20 @@ html[data-vt='circle']::view-transition-new(root) {
   }
 }
 
-/* Light theme — override only backgrounds/text/accent-glow.
-   Bar colors stay: they're the hero and read fine on light. */
+/* Light theme = "Sage Garden" (21st.dev / Serafim). Exact light-mode values.
+   Bar hero colors stay; only chrome + accent go sage. */
 :root[data-theme='light'] {
-  --bg-base: #f4f5fb;
-  --bg-surface: #ffffff;
-  --bg-elevated: #eceef6;
-  --bg-border: #d4d8e8;
+  --bg-base: #f8f7f4;      /* background */
+  --bg-surface: #ffffff;   /* card */
+  --bg-elevated: #e8e6e1;  /* muted */
+  --bg-border: #e8e6e1;    /* border */
 
-  --text-primary: #1a1a2e;
-  --text-secondary: #4a5599;
-  --text-muted: #9aa0c4;
+  --text-primary: #2a2f2a;
+  --text-secondary: #7c9082; /* primary sage */
+  --text-muted: #9aa192;
 
-  --accent-glow: rgba(61, 90, 254, 0.18);
+  --accent: #7c9082;                       /* primary */
+  --accent-glow: rgba(124, 144, 130, 0.18);
 }
 
 * {
