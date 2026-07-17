@@ -18,27 +18,27 @@ export const mergeSort: SortAlgorithm = (input) => {
     let k = lo;
 
     while (i < left.length && j < right.length) {
-      builder.compare([lo + i, mid + 1 + j], `Compare ${left[i]} and ${right[j]} while merging.`);
+      builder.compare([lo + i, mid + 1 + j], `Compare ${left[i]} and ${right[j]} while merging.`, 6);
       if (left[i] <= right[j]) {
         arr[k] = left[i];
-        builder.move([...arr], [k], `Place ${left[i]} into position ${k}.`);
+        builder.move([...arr], [k], `Place ${left[i]} into position ${k}.`, 7);
         i++;
       } else {
         arr[k] = right[j];
-        builder.move([...arr], [k], `Place ${right[j]} into position ${k}.`);
+        builder.move([...arr], [k], `Place ${right[j]} into position ${k}.`, 9);
         j++;
       }
       k++;
     }
     while (i < left.length) {
       arr[k] = left[i];
-      builder.move([...arr], [k], `Place remaining ${left[i]} into position ${k}.`);
+      builder.move([...arr], [k], `Place remaining ${left[i]} into position ${k}.`, 10);
       i++;
       k++;
     }
     while (j < right.length) {
       arr[k] = right[j];
-      builder.move([...arr], [k], `Place remaining ${right[j]} into position ${k}.`);
+      builder.move([...arr], [k], `Place remaining ${right[j]} into position ${k}.`, 11);
       j++;
       k++;
     }

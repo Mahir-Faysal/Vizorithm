@@ -15,16 +15,16 @@ export const insertionSort: SortAlgorithm = (input) => {
   for (let i = 1; i < n; i++) {
     const key = arr[i];
     let j = i - 1;
-    builder.compare([i, j], `Select position ${i} (value ${key}) to insert.`);
+    builder.compare([i, j], `Select position ${i} (value ${key}) to insert.`, 2);
 
     while (j >= 0 && arr[j] > key) {
-      builder.compare([j, j + 1], `Value ${arr[j]} at ${j} is greater than ${key}; shift right.`);
+      builder.compare([j, j + 1], `Value ${arr[j]} at ${j} is greater than ${key}; shift right.`, 4);
       arr[j + 1] = arr[j];
-      builder.move([...arr], [j, j + 1], `Shift value ${arr[j]} from ${j} to ${j + 1}.`);
+      builder.move([...arr], [j, j + 1], `Shift value ${arr[j]} from ${j} to ${j + 1}.`, 5);
       j--;
     }
     arr[j + 1] = key;
-    builder.move([...arr], [j + 1], `Insert value ${key} at position ${j + 1}.`);
+    builder.move([...arr], [j + 1], `Insert value ${key} at position ${j + 1}.`, 7);
   }
 
   return builder.build();

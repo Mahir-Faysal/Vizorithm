@@ -13,18 +13,18 @@ export const quickSort: SortAlgorithm = (input) => {
     const pivot = arr[hi];
     let i = lo;
     for (let j = lo; j < hi; j++) {
-      builder.compare([j, hi], `Compare value ${arr[j]} at ${j} with pivot ${pivot}.`);
+      builder.compare([j, hi], `Compare value ${arr[j]} at ${j} with pivot ${pivot}.`, 4);
       if (arr[j] < pivot) {
         if (i !== j) {
           [arr[i], arr[j]] = [arr[j], arr[i]];
-          builder.move([...arr], [i, j], `Swap ${arr[j]} and ${arr[i]} around the pivot.`);
+          builder.move([...arr], [i, j], `Swap ${arr[j]} and ${arr[i]} around the pivot.`, 5);
         }
         i++;
       }
     }
     if (i !== hi) {
       [arr[i], arr[hi]] = [arr[hi], arr[i]];
-      builder.move([...arr], [i, hi], `Move pivot ${pivot} into position ${i}.`);
+      builder.move([...arr], [i, hi], `Move pivot ${pivot} into position ${i}.`, 6);
     }
     return i;
   };

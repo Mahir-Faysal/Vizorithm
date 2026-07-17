@@ -14,10 +14,10 @@ export const bubbleSort: SortAlgorithm = (input) => {
   for (let pass = 0; pass < n - 1; pass++) {
     let swapped = false;
     for (let i = 0; i < n - 1 - pass; i++) {
-      builder.compare([i, i + 1], `Compare positions ${i} and ${i + 1}.`);
+      builder.compare([i, i + 1], `Compare positions ${i} and ${i + 1}.`, 4);
       if (arr[i] > arr[i + 1]) {
         [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-        builder.move([...arr], [i, i + 1], `Swap positions ${i} and ${i + 1}.`);
+        builder.move([...arr], [i, i + 1], `Swap positions ${i} and ${i + 1}.`, 5);
         swapped = true;
       }
     }

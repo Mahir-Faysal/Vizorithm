@@ -13,10 +13,10 @@
 import type { AlgorithmStep } from '../types';
 
 export interface TraceBuilder {
-  /** Record a comparison of the given indices, with a description. */
-  compare(indices: number[], description: string): void;
-  /** Record a write/move/swap that mutates the working array, with a description. */
-  move(nextArray: number[], movingIndices: number[], description: string): void;
+  /** Record a comparison of the given indices, with a description and source line. */
+  compare(indices: number[], description: string, line?: number): void;
+  /** Record a write/move/swap that mutates the working array, with a description and source line. */
+  move(nextArray: number[], movingIndices: number[], description: string, line?: number): void;
   /** Mark indices as finalized (sorted) for all subsequent steps. */
   markSorted(indices: number[]): void;
   /** Produce the immutable trace, appending a completion step (all sorted). */
@@ -36,6 +36,7 @@ export function createTraceBuilder(input: readonly number[]): TraceBuilder {
     comparing: number[],
     moving: number[],
     description: string,
+    line?: number,
   ): AlgorithmStep => ({
     array: [...array],
     comparing: [...comparing],
@@ -44,18 +45,19 @@ export function createTraceBuilder(input: readonly number[]): TraceBuilder {
     description,
     comparisons,
     swaps,
+    line,
   });
 
   // Seed with the initial state so the first step always equals the input.
   steps.push(snapshot(current, [], [], 'Initial unsorted array.'));
 
   return {
-    compare(indices, description) {
+    compare(indices, description, line) {
       comparisons++;
-      steps.push(snapshot(current, indices, [], description));
+      steps.push(snapshot(current, indices, [], description, line));
     },
 
-    move(nextArray, movingIndices, description) {
+    move(nextArray, movingIndices, description, line) {
       if (nextArray.length !== length) {
         throw new Error(
           `TraceBuilder.move: array length ${nextArray.length} does not match input length ${length}.`,
@@ -63,7 +65,7 @@ export function createTraceBuilder(input: readonly number[]): TraceBuilder {
       }
       swaps++;
       current = [...nextArray];
-      steps.push(snapshot(current, [], movingIndices, description));
+      steps.push(snapshot(current, [], movingIndices, description, line));
     },
 
     markSorted(indices) {

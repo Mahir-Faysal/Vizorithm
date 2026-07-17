@@ -95,14 +95,24 @@ body {
   min-height: 100vh;
 }
 
-/* ===== APP SHELL ===== */
+/* ===== APP SHELL =====
+   Two columns: the existing UI compressed into the left 3/4, a code panel in
+   the right 1/4. Total width unchanged. */
 .app {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--sp-4);
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--sp-4);
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.app__main {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-width: 0;
 }
 
 .app__header {
@@ -208,7 +218,10 @@ body {
 
 .bar--comparing {
   background: var(--bar-compare);
-  transform: scaleX(1.05);
+  /* Soft glow instead of scaleX: emphasis without widening into the neighbor
+     and closing the 2px gap during a two-bar comparison. Blur only, no hard
+     spread ring, so adjacent comparing bars stay visually separated. */
+  box-shadow: 0 0 14px -3px var(--bar-compare);
 }
 
 .bar--moving {
@@ -485,6 +498,105 @@ input[type='range']::-moz-range-thumb {
   color: var(--text-primary);
 }
 
+/* ===== CODE PANEL =====
+   Right column. The snippet is vertically centered (starts mid-panel, not from
+   the top) and sticks in view while the left column scrolls. */
+.code {
+  align-self: center;
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.code__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--bg-border);
+}
+
+.code__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+.code__name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.code__body {
+  margin: 0;
+  padding: var(--sp-1) 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  tab-size: 2;
+  overflow-x: auto;
+}
+
+.code__line {
+  display: flex;
+  gap: var(--sp-2);
+  padding: 1px var(--sp-3);
+  white-space: pre;
+  transition: background-color 160ms ease;
+}
+
+/* Active line conveys "now executing": a full-row tint (no side stripe) plus
+   an accent gutter number. State, not decoration. */
+.code__line--active {
+  background: var(--accent-glow);
+}
+
+.code__gutter {
+  flex: 0 0 auto;
+  width: 1.4em;
+  text-align: right;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.code__line--active .code__gutter {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.code__text {
+  color: var(--text-primary);
+}
+
+.code__line--active .code__text {
+  color: var(--text-primary);
+}
+
+/* Syntax tokens — theme-driven so both light and dark stay on-palette. */
+.code__tok--kw {
+  color: var(--bar-swap);
+  font-weight: 600;
+}
+
+.code__tok--num {
+  color: var(--bar-compare);
+}
+
+.code__tok--op {
+  color: var(--text-muted);
+}
+
 /* ===== NOTICES ===== */
 .notice {
   min-height: 1rem;
@@ -509,6 +621,17 @@ input[type='range']::-moz-range-thumb {
 }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .code {
+    position: static;
+    max-height: none;
+    justify-content: flex-start;
+  }
+}
+
 @media (max-width: 768px) {
   .panel {
     grid-template-columns: 1fr;

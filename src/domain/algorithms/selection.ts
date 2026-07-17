@@ -13,14 +13,14 @@ export const selectionSort: SortAlgorithm = (input) => {
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
     for (let j = i + 1; j < n; j++) {
-      builder.compare([minIndex, j], `Compare current minimum at ${minIndex} with position ${j}.`);
+      builder.compare([minIndex, j], `Compare current minimum at ${minIndex} with position ${j}.`, 4);
       if (arr[j] < arr[minIndex]) {
         minIndex = j;
       }
     }
     if (minIndex !== i) {
       [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
-      builder.move([...arr], [i, minIndex], `Swap minimum into position ${i}.`);
+      builder.move([...arr], [i, minIndex], `Swap minimum into position ${i}.`, 7);
     }
     builder.markSorted([i]);
   }

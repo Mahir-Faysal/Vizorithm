@@ -29,6 +29,12 @@ export interface AlgorithmStep {
   comparisons: number;
   /** Cumulative swap/move count up to and including this step. */
   swaps: number;
+  /**
+   * 1-based index into the algorithm's `code` lines that this step executes.
+   * Undefined for structural steps (initial seed, completion) that map to no
+   * single source line.
+   */
+  line?: number;
 }
 
 /** An immutable, ordered sequence of steps produced by running an algorithm. */
@@ -56,6 +62,12 @@ export interface AlgorithmMeta {
     /** Space complexity in Big-O. */
     space: string;
   };
+  /**
+   * The algorithm's source, one entry per line (1-based when matched against
+   * `AlgorithmStep.line`). Displayed in the code panel with the executing line
+   * highlighted as playback advances.
+   */
+  code: readonly string[];
   sort: SortAlgorithm;
 }
 
