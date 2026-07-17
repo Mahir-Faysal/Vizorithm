@@ -1,5 +1,5 @@
-/* SortLab — Dark terminal aesthetic.
-   Precision-engineered. Bars are the hero. Everything else stays quiet. */
+/* Vizorithm — "Sage Garden" theme (21st.dev / Serafim), dark + light.
+   Bars are the hero. Everything else stays quiet. */
 
 :root {
   /* Fonts */
@@ -7,27 +7,27 @@
   --font-mono: 'JetBrains Mono', monospace;
   --font-body: 'DM Sans', sans-serif;
 
-  /* Backgrounds — layered, not flat */
-  --bg-base: #0a0a0f;
-  --bg-surface: #111118;
-  --bg-elevated: #1a1a24;
-  --bg-border: #2a2a38;
+  /* Default (dark) = "Sage Garden" dark (21st.dev / Serafim). */
+  --bg-base: #0a0a0a;      /* background */
+  --bg-surface: #121212;   /* card */
+  --bg-elevated: #1a1a1a;  /* muted / secondary */
+  --bg-border: #2a2a2a;    /* border */
 
-  /* Bars — the HERO */
-  --bar-default: #3d5afe;
-  --bar-compare: #ff6d00;
-  --bar-swap: #00e5ff;
-  --bar-sorted: #00e676;
-  --bar-pivot: #ff1744;
+  /* Bars — the HERO. Sage/chart tones, brightened for the dark bg. */
+  --bar-default: #7c9082;   /* primary sage (chart 1) */
+  --bar-compare: #d18b5c;   /* warm terracotta — "attention" */
+  --bar-swap: #4fd1c5;      /* bright teal — distinct from the sage greens */
+  --bar-sorted: #a0aa88;    /* light sage green (chart 2) */
+  --bar-pivot: #ef4444;     /* destructive */
 
   /* Text */
-  --text-primary: #e8eaf6;
-  --text-secondary: #7986cb;
-  --text-muted: #424270;
+  --text-primary: #e8e6e1;
+  --text-secondary: #7c9082; /* primary sage */
+  --text-muted: #6b7280;     /* chart 4 */
 
   /* Accent */
-  --accent: #3d5afe;
-  --accent-glow: rgba(61, 90, 254, 0.25);
+  --accent: #7c9082;                       /* primary */
+  --accent-glow: rgba(124, 144, 130, 0.25);
 
   /* Spacing grid: 8px */
   --sp-1: 8px;
@@ -69,6 +69,14 @@ html[data-vt='circle']::view-transition-new(root) {
 
   --accent: #7c9082;                       /* primary */
   --accent-glow: rgba(124, 144, 130, 0.18);
+
+  /* Sage-matched bars: muted, saturated enough to stay distinct on the
+     warm off-white bg, but no neon. Sorted = the theme's sage green. */
+  --bar-default: #8b9d83;   /* sage (chart 3) */
+  --bar-compare: #c77d4a;   /* warm terracotta — reads as "attention" */
+  --bar-swap: #0d9488;      /* deep teal — distinct from the sage greens */
+  --bar-sorted: #5f7a5a;    /* deep sage green */
+  --bar-pivot: #c73e3a;     /* destructive */
 }
 
 * {
@@ -194,31 +202,26 @@ body {
   background: var(--bar-default);
   transition: height 120ms cubic-bezier(0.4, 0, 0.2, 1),
               background-color 150ms ease,
-              box-shadow 150ms ease,
               transform 150ms ease;
   position: relative;
 }
 
 .bar--comparing {
   background: var(--bar-compare);
-  box-shadow: 0 0 12px var(--bar-compare), 0 0 24px rgba(255, 109, 0, 0.3);
   transform: scaleX(1.05);
 }
 
 .bar--moving {
   background: var(--bar-swap);
-  box-shadow: 0 0 16px var(--bar-swap);
   animation: swap-pulse 150ms ease;
 }
 
 .bar--sorted {
   background: var(--bar-sorted);
-  box-shadow: 0 0 8px rgba(0, 230, 118, 0.4);
 }
 
 .bar--completion {
   background: var(--bar-sorted);
-  box-shadow: 0 0 12px rgba(0, 230, 118, 0.5);
 }
 
 @keyframes swap-pulse {
