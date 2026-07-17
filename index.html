@@ -10,6 +10,12 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Apply saved theme before paint to avoid a flash. Default: dark.
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

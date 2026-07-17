@@ -9,6 +9,7 @@ import { PlaybackControls } from './PlaybackControls';
 import { AlgorithmInfoPanel } from './AlgorithmInfoPanel';
 import { StatsPanel } from './StatsPanel';
 import { Notice } from './Notice';
+import { ThemeToggle } from './ThemeToggle';
 import './visualizer.css';
 
 function VisualizerLayout() {
@@ -20,9 +21,12 @@ function VisualizerLayout() {
     <main className="app">
       <header className="app__header">
         <h1 className="app__title">Vizorithm</h1>
-        <span className="app__status">
-          Step {stepIndex + 1} / {totalSteps}
-        </span>
+        <div className="app__header-right">
+          <span className="app__status">
+            Step {stepIndex + 1} / {totalSteps}
+          </span>
+          <ThemeToggle />
+        </div>
       </header>
 
       <Notice message={loadError} variant="error" />
